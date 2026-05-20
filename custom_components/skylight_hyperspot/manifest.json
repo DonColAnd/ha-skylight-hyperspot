@@ -1,0 +1,10 @@
+{
+  "domain": "skylight_hyperspot",
+  "name": "Skylight Hyperspot",
+  "config_flow": true,
+  "dependencies": [],
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "requirements": [],
+  "version": "0.3.1"
+}

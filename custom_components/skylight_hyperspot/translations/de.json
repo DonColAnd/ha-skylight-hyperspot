@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Skylight Hyperspot einrichten",
+        "description": "Gib die lokale IP-Adresse deiner Skylight Hyperspot Lampe ein.",
+        "data": {
+          "host": "IP-Adresse / Host",
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zur Lampe fehlgeschlagen. Prüfe IP-Adresse und Netzwerk."
+    },
+    "abort": {
+      "already_configured": "Diese Lampe ist bereits eingerichtet."
+    }
+  }
+}

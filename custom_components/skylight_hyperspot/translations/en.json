@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Skylight Hyperspot",
+        "description": "Enter the local IP address of your Skylight Hyperspot lamp.",
+        "data": {
+          "host": "IP address / host",
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the lamp. Check the IP address and network."
+    },
+    "abort": {
+      "already_configured": "This lamp is already configured."
+    }
+  }
+}
