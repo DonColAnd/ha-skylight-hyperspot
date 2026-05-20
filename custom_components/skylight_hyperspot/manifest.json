@@ -1,6 +1,7 @@
 {
   "domain": "skylight_hyperspot",
   "name": "Skylight Hyperspot",
+  "icon": "sl_icon.png",
   "config_flow": true,
   "dependencies": [],
   "integration_type": "device",
