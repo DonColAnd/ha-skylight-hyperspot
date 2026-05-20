@@ -1,14 +1,31 @@
-if user_input is not None:
-    host = user_input["host"].strip()
-    name = user_input["name"].strip() or "Skylight Hyperspot"
+from homeassistant import config_entries
+import voluptuous as vol
 
-    await self.async_set_unique_id(host)
-    self._abort_if_unique_id_configured()
+from .const import DOMAIN
 
-    return self.async_create_entry(
-        title=name,
-        data={
-            "host": host,
-            "name": name,
-        },
-    )
+
+class SkylightConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    VERSION = 1
+
+    async def async_step_user(self, user_input=None):
+        errors = {}
+
+        if user_input is not None:
+            return self.async_create_entry(
+                title=user_input["name"],
+                data=user_input,
+            )
+
+        return self.async_show_form(
+            step_id="user",
+            data_schema=vol.Schema(
+                {
+                    vol.Required("host"): str,
+                    vol.Required(
+                        "name",
+                        default="Skylight Hyperspot"
+                    ): str,
+                }
+            ),
+            errors=errors,
+        )
