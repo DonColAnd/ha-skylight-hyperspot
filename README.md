@@ -14,11 +14,11 @@ Custom Home Assistant integration for Skylight Hyperspot aquarium lights.
 
 This integration was currently only tested with:
 
-- Skylight Hyperspot AQCT-3
+- Skylight Hyperspot M AQCT-3
 
 The internal channel scaling values may differ between Skylight models.
 
-For the AQCT-3 model:
+For the Hyperspot M AQCT-3 model:
 - 0–10000 was used as the warm/cold channel range.
 
 Other models may use:
