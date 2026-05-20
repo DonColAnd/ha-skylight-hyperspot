@@ -1,15 +1,15 @@
 from __future__ import annotations
 
-from homeassistant import config_entries
 import voluptuous as vol
+
+from homeassistant import config_entries
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .api import SkylightApiError, SkylightHyperspotApi
 from .const import CONF_HOST, CONF_NAME, DOMAIN
 
 
 class SkylightConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Skylight Hyperspot."""
-
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
@@ -19,7 +19,11 @@ class SkylightConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             host = user_input[CONF_HOST].strip()
             name = user_input[CONF_NAME].strip() or "Skylight Hyperspot"
 
-            api = SkylightHyperspotApi(host, self.hass.helpers.aiohttp_client.async_get_clientsession(self.hass))
+            api = SkylightHyperspotApi(
+                host,
+                async_get_clientsession(self.hass),
+            )
+
             try:
                 await api.model()
             except SkylightApiError:
@@ -27,9 +31,13 @@ class SkylightConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             else:
                 await self.async_set_unique_id(host)
                 self._abort_if_unique_id_configured()
+
                 return self.async_create_entry(
                     title=name,
-                    data={CONF_HOST: host, CONF_NAME: name},
+                    data={
+                        CONF_HOST: host,
+                        CONF_NAME: name,
+                    },
                 )
 
         return self.async_show_form(
