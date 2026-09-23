@@ -22,12 +22,18 @@ class SkylightHyperspotAutoButton(ButtonEntity):
     """Button to send the currently known auto/resume command."""
 
     _attr_has_entity_name = True
-    _attr_name = "Auto / Zeitplan"
+    _attr_name = "Auto / Schedule"
 
-    def __init__(self, api: SkylightHyperspotApi, entry: ConfigEntry) -> None:
+    def __init__(
+        self,
+        api: SkylightHyperspotApi,
+        entry: ConfigEntry,
+    ) -> None:
         self.api = api
         self.entry = entry
+
         name = entry.data[CONF_NAME]
+
         self._attr_unique_id = f"{entry.entry_id}_auto_button"
         self._attr_device_info = {
             "identifiers": {(DOMAIN, entry.entry_id)},
@@ -35,6 +41,7 @@ class SkylightHyperspotAutoButton(ButtonEntity):
             "manufacturer": "Skylight",
             "model": "Hyperspot",
         }
+
         self._attr_available = True
 
     async def async_press(self) -> None:
@@ -44,4 +51,5 @@ class SkylightHyperspotAutoButton(ButtonEntity):
             self._attr_available = False
         else:
             self._attr_available = True
+
         self.async_write_ha_state()
